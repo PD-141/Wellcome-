@@ -1,35 +1,23 @@
-// modules are defined as an array
-// [ module function, map of requires ]
-//
-// map of requires is short require name -> numeric require
-//
-// anything defined in a previous bundle is accessed via the
-// orig method which is the require for previous bundles
+
 parcelRequire = (function (modules, cache, entry, globalName) {
-    // Save the require from previous bundle to this closure if any
+
     var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
     var nodeRequire = typeof require === 'function' && require;
   
     function newRequire(name, jumped) {
       if (!cache[name]) {
         if (!modules[name]) {
-          // if we cannot find the module within our internal map or
-          // cache jump to the current global require ie. the last bundle
-          // that was added to the page.
+
           var currentRequire = typeof parcelRequire === 'function' && parcelRequire;
           if (!jumped && currentRequire) {
             return currentRequire(name, true);
           }
-  
-          // If there are other bundles on this page the require from the
-          // previous one is saved to 'previousRequire'. Repeat this as
-          // many times as there are bundles until the module is found or
-          // we exhaust the require chain.
+
           if (previousRequire) {
             return previousRequire(name, true);
           }
   
-          // Try the node require function if it exists.
+
           if (nodeRequire && typeof name === 'string') {
             return nodeRequire(name);
           }
@@ -80,7 +68,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       try {
         newRequire(entry[i]);
       } catch (e) {
-        // Save first error but execute all entries
+
         if (!error) {
           error = e;
         }
@@ -88,31 +76,29 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     }
   
     if (entry.length) {
-      // Expose entry point to Node, AMD or browser globals
-      // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+
       var mainExports = newRequire(entry[entry.length - 1]);
   
-      // CommonJS
+
       if (typeof exports === "object" && typeof module !== "undefined") {
         module.exports = mainExports;
   
-      // RequireJS
+
       } else if (typeof define === "function" && define.amd) {
        define(function () {
          return mainExports;
        });
   
-      // <script>
+
       } else if (globalName) {
         this[globalName] = mainExports;
       }
     }
   
-    // Override the current require with this new one
+
     parcelRequire = newRequire;
   
     if (error) {
-      // throw error from earlier, _after updating parcelRequire_
       throw error;
     }
   
@@ -138,17 +124,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     subClass.prototype.constructor = subClass;
     subClass.__proto__ = superClass;
   }
-  /*!
-   * GSAP 3.3.1
-   * https://greensock.com
-   *
-   * @license Copyright 2008-2020, GreenSock. All rights reserved.
-   * Subject to the terms at https://greensock.com/standard-license or for
-   * Club GreenSock members, the agreement issued with that membership.
-   * @author: Jack Doyle, jack@greensock.com
-  */
-  
-  /* eslint-disable */
+ 
   
   
   var _config = {
@@ -198,14 +174,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   },
       _isArray = Array.isArray,
       _strictNumExp = /(?:-?\.?\d|\.)+/gi,
-      //only numbers (including negatives and decimals) but NOT relative values.
   _numExp = /[-+=.]*\d+[.e\-+]*\d*[e\-\+]*\d*/g,
-      //finds any numbers, including ones that start with += or -=, negative numbers, and ones in scientific notation like 1e-8.
   _numWithUnitExp = /[-+=.]*\d+[.e-]*\d*[a-z%]*/g,
       _complexStringNumExp = /[-+=.]*\d+(?:\.|e-|e)*\d*/gi,
-      //duplicate so that while we're looping through matches from exec(), it doesn't contaminate the lastIndex of _numExp which we use to search for colors too.
   _parenthesesExp = /\(([^()]+)\)/i,
-      //finds the string between parentheses.
   _relExp = /[+-]=-?[\.\d]+/,
       _delimitedValueExp = /[#\-+.]*\b[a-z\d-=+%.]+/gi,
       _globalTimeline,
@@ -274,12 +246,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       _forEachName = function _forEachName(names, func) {
     return (names = names.split(",")).forEach(func) || names;
   },
-      //split a comma-delimited list of names into an array, then run a forEach() function and return the split array (this is just a way to consolidate/shorten some code).
   _round = function _round(value) {
     return Math.round(value * 100000) / 100000 || 0;
   },
       _arrayContainsAny = function _arrayContainsAny(toSearch, toFind) {
-    //searches one array to find matches for any of the items in the toFind array. As soon as one is found, it returns true. It does NOT return all the matches; it's simply a boolean search.
     var l = toFind.length,
         i = 0;
   
@@ -288,7 +258,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     return i < l;
   },
       _parseVars = function _parseVars(params, type, parent) {
-    //reads the arguments passed to one of the key methods and figures out if the user is defining things with the OLD/legacy syntax where the duration is the 2nd parameter, and then it adjusts things accordingly and spits back the corrected vars object (with the duration added if necessary, as well as runBackwards or startAt or immediateRender). type 0 = to()/staggerTo(), 1 = from()/staggerFrom(), 2 = fromTo()/staggerFromTo()
     var isLegacy = _isNumber(params[1]),
         varsIndex = (isLegacy ? 2 : 1) + (type < 2 ? 0 : 1),
         vars = params[varsIndex],
@@ -304,7 +273,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       irVars = vars;
   
       while (parent && !("immediateRender" in irVars)) {
-        // inheritance hasn't happened yet, but someone may have set a default in an ancestor timeline. We could do vars.immediateRender = _isNotFalse(_inheritDefaults(vars).immediateRender) but that'd exact a slight performance penalty because _inheritDefaults() also runs in the Tween constructor. We're paying a small kb price here to gain speed.
         irVars = parent.vars.defaults || {};
         parent = _isNotFalse(parent.vars.inherit) && parent.parent;
       }
@@ -337,7 +305,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       _lazySafeRender = function _lazySafeRender(animation, time, suppressEvents, force) {
     _lazyTweens.length && _lazyRender();
     animation.render(time, suppressEvents, force);
-    _lazyTweens.length && _lazyRender(); //in case rendering caused any tweens to lazy-init, we should render them because typically when someone calls seek() or time() or progress(), they expect an immediate render.
+    _lazyTweens.length && _lazyRender(); 
   },
       _numericIfPossible = function _numericIfPossible(value) {
     var n = parseFloat(value);
@@ -469,7 +437,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       parent[lastProp] = prev;
     }
   
-    child._next = child._prev = child.parent = null; // don't delete the _dp just so we can revert if necessary. But parent should be null to indicate the item isn't in a linked list.
+    child._next = child._prev = child.parent = null; 
   },
       _removeFromParent = function _removeFromParent(child, onlyIfParentHasAutoRemove) {
     if (child.parent && (!onlyIfParentHasAutoRemove || child.parent.autoRemoveChildren)) {
@@ -492,7 +460,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     var parent = animation.parent;
   
     while (parent && parent.parent) {
-      //sometimes we must force a re-sort of all children and update the duration/totalDuration of all ancestor timelines immediately in case, for example, in the middle of a render loop, one tween alters another tween's timeScale which shoves its startTime before 0, forcing the parent timeline to shift around and shiftChildren() which could affect that next tween's render (startTime). Doesn't matter for the root timeline though.
       parent._dirty = 1;
       parent.totalDuration();
       parent = parent.parent;
@@ -506,7 +473,6 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       _elapsedCycleDuration = function _elapsedCycleDuration(animation) {
     return animation._repeat ? _animationCycle(animation._tTime, animation = animation.duration() + animation._rDelay) * animation : 0;
   },
-      // feed in the totalTime and cycleDuration and it'll return the cycle (iteration minus 1) and if the playhead is exactly at the very END, it will NOT bump up to the next cycle.
   _animationCycle = function _animationCycle(tTime, cycleDuration) {
     return (tTime /= cycleDuration) && ~~tTime === tTime ? ~~tTime - 1 : ~~tTime;
   },
@@ -517,27 +483,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     return animation._end = _round(animation._start + (animation._tDur / Math.abs(animation._ts || animation._rts || _tinyNum) || 0));
   },
   
-  /*
-  _totalTimeToTime = (clampedTotalTime, duration, repeat, repeatDelay, yoyo) => {
-      let cycleDuration = duration + repeatDelay,
-          time = _round(clampedTotalTime % cycleDuration);
-      if (time > duration) {
-          time = duration;
-      }
-      return (yoyo && (~~(clampedTotalTime / cycleDuration) & 1)) ? duration - time : time;
-  },
-  */
+ 
   _postAddChecks = function _postAddChecks(timeline, child) {
     var t;
   
     if (child._time || child._initted && !child._dur) {
-      //in case, for example, the _start is moved on a tween that has already rendered. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning.
       t = _parentToChildTotalTime(timeline.rawTime(), child);
   
       if (!child._dur || _clamp(0, child.totalDuration(), t) - child._tTime > _tinyNum) {
         child.render(t, true);
       }
-    } //if the timeline has already ended but the inserted tween/timeline extends the duration, we should enable this timeline again so that it renders properly. We should also align the playhead with the parent timeline's when appropriate.
+    }
   
   
     if (_uncache(timeline)._dp && timeline._initted && timeline._time >= timeline._dur && timeline._ts) {
@@ -546,13 +502,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
         t = timeline;
   
         while (t._dp) {
-          t.rawTime() >= 0 && t.totalTime(t._tTime); //moves the timeline (shifts its startTime) if necessary, and also enables it. If it's currently zero, though, it may not be scheduled to render until later so there's no need to force it to align with the current playhead position. Only move to catch up with the playhead.
+          t.rawTime() >= 0 && t.totalTime(t._tTime); 
   
           t = t._dp;
         }
       }
   
-      timeline._zTime = -_tinyNum; // helps ensure that the next render() will be forced (crossingStart = true in render()), even if the duration hasn't changed (we're adding a child which would need to get rendered). Definitely an edge case. Note: we MUST do this AFTER the loop above where the totalTime() might trigger a render() because this _addToTimeline() method gets called from the Animation constructor, BEFORE tweens even record their targets, etc. so we wouldn't want things to get triggered in the wrong order.
+      timeline._zTime = -_tinyNum; 
     }
   },
       _addToTimeline = function _addToTimeline(timeline, child, position, skipChecks) {
@@ -5851,31 +5807,24 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   ImagesLoaded.prototype.getImages = function() {
     this.images = [];
   
-    // filter & find items if we have an item selector
     this.elements.forEach( this.addElementImages, this );
   };
   
-  /**
-   * @param {Node} element
-   */
+
   ImagesLoaded.prototype.addElementImages = function( elem ) {
-    // filter siblings
+
     if ( elem.nodeName == 'IMG' ) {
       this.addImage( elem );
     }
-    // get background image on element
     if ( this.options.background === true ) {
       this.addElementBackgroundImages( elem );
     }
   
-    // find children
-    // no non-element nodes, #143
     var nodeType = elem.nodeType;
     if ( !nodeType || !elementNodeTypes[ nodeType ] ) {
       return;
     }
     var childImgs = elem.querySelectorAll('img');
-    // concat childElems to filterFound array
     for ( var i=0; i < childImgs.length; i++ ) {
       var img = childImgs[i];
       this.addImage( img );
@@ -5900,10 +5849,10 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   ImagesLoaded.prototype.addElementBackgroundImages = function( elem ) {
     var style = getComputedStyle( elem );
     if ( !style ) {
-      // Firefox returns null if in a hidden iframe https://bugzil.la/548397
+
       return;
     }
-    // get url inside url("...")
+
     var reURL = /url\((['"])?(.*?)\1\)/gi;
     var matches = reURL.exec( style.backgroundImage );
     while ( matches !== null ) {
@@ -5914,10 +5863,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       matches = reURL.exec( style.backgroundImage );
     }
   };
-  
-  /**
-   * @param {Image} img
-   */
+
   ImagesLoaded.prototype.addImage = function( img ) {
     var loadingImage = new LoadingImage( img );
     this.images.push( loadingImage );
@@ -5932,14 +5878,14 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     var _this = this;
     this.progressedCount = 0;
     this.hasAnyBroken = false;
-    // complete if no images
+
     if ( !this.images.length ) {
       this.complete();
       return;
     }
   
     function onProgress( image, elem, message ) {
-      // HACK - Chrome triggers event before object properties have changed. #83
+
       setTimeout( function() {
         _this.progress( image, elem, message );
       });
@@ -5959,7 +5905,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     if ( this.jqDeferred && this.jqDeferred.notify ) {
       this.jqDeferred.notify( this, image );
     }
-    // check if completed
+
     if ( this.progressedCount == this.images.length ) {
       this.complete();
     }
@@ -5989,8 +5935,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   LoadingImage.prototype = Object.create( EvEmitter.prototype );
   
   LoadingImage.prototype.check = function() {
-    // If complete is true and browser supports natural sizes,
-    // try to check for image status manually.
+
     var isComplete = this.getIsImageComplete();
     if ( isComplete ) {
       // report based on naturalWidth
@@ -5998,11 +5943,11 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       return;
     }
   
-    // If none of the checks above matched, simulate loading on detached element.
+
     this.proxyImage = new Image();
     this.proxyImage.addEventListener( 'load', this );
     this.proxyImage.addEventListener( 'error', this );
-    // bind to image as well for Firefox. #191
+
     this.img.addEventListener( 'load', this );
     this.img.addEventListener( 'error', this );
     this.proxyImage.src = this.img.src;
@@ -6094,7 +6039,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       return instance.jqDeferred.promise( $(this) );
     };
   };
-  // try making plugin
+
   ImagesLoaded.makeJQueryPlugin();
   
   // --------------------------  -------------------------- //
@@ -6299,7 +6244,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   var winsize = (0, _utils.calcWinsize)();
   window.addEventListener('resize', function () {
     return winsize = (0, _utils.calcWinsize)();
-  }); // Track the mouse position
+  }); 
   
   var mousepos = {
     x: winsize.width / 2,
@@ -6317,7 +6262,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
         el: el
       };
       this.move();
-    } // Move the items when moving the cursor
+    } 
   
   
     _createClass(GridItem, [{
@@ -6325,19 +6270,17 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       value: function move() {
         var _this = this;
   
-        // amounts to move in each axis
+
         var translationVals = {
           tx: 0,
           ty: 0
-        }; // get random start and end movement boundaries
+        }; 
   
         var xstart = (0, _utils.getRandomNumber)(15, 60);
-        var ystart = (0, _utils.getRandomNumber)(15, 60); // infinite loop
+        var ystart = (0, _utils.getRandomNumber)(15, 60); 
   
         var render = function render() {
-          // Calculate the amount to move.
-          // Using linear interpolation to smooth things out. 
-          // Translation values will be in the range of [-start, start] for a cursor movement from 0 to the window's width/height
+        
           translationVals.tx = (0, _utils.lerp)(translationVals.tx, (0, _utils.map)(mousepos.x, 0, winsize.width, -xstart, xstart), 0.07);
           translationVals.ty = (0, _utils.lerp)(translationVals.ty, (0, _utils.map)(mousepos.y, 0, winsize.height, -ystart, ystart), 0.07);
   
@@ -6371,7 +6314,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
         return _this2.gridItems.push(new GridItem(item));
       });
       this.showItems();
-    } // Initial animation to scale up and fade in the items
+    }
   
   
     _createClass(Grid, [{
@@ -6417,11 +6360,8 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
   
-  // Preload  images
   (0, _utils.preloadImages)('.grid__item-img, .bigimg').then(function () {
-    // Remove loader (loading class)
-    document.body.classList.remove('loading'); // Initialize grid
-  
+    document.body.classList.remove('loading'); 
     var grid = new _grid.default(document.querySelector('.grid'));
   });
   var cursor = new _cursor.default(document.querySelector('.cursor'));
